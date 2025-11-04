@@ -1,0 +1,42 @@
+# FPGA Ultra Low Latency Learning Project
+# Ignore all build, temp, and Vivado-generated files
+
+# Vivado build directories
+*.runs/
+*.sim/
+*.cache/
+*.hw/
+*.ip_user_files/
+*.srcs/
+*.gen/
+*.xpr
+*.jou
+*.log
+*.str
+*.dcp
+*.xsa
+
+# Simulation files
+*.wdb
+*.vcd
+*.saif
+*.pb
+*.xsim.dir/
+
+# Temporary or auto-generated
+*.tmp
+*.bak
+*.jou
+*.log
+*.txt~
+*.swp
+*.vitis/
+*.ipynb_checkpoints/
+
+# System-specific
+.DS_Store
+Thumbs.db
+
+# Python helper scripts
+__pycache__/
+*.pyc

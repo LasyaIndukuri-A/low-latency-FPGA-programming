@@ -33,17 +33,19 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity ripple_adder is
+    generic (n : integer := 32);
     Port (
         clk : in  STD_LOGIC;
-        a   : in  STD_LOGIC_VECTOR(31 downto 0);
-        b   : in  STD_LOGIC_VECTOR(31 downto 0);
-        sum : out STD_LOGIC_VECTOR(31 downto 0)
+        a   : in  STD_LOGIC_VECTOR(n-1 downto 0);
+        b   : in  STD_LOGIC_VECTOR(n-1 downto 0);
+        sum : out STD_LOGIC_VECTOR(n-1 downto 0);
+        carry : out std_logic
     );
 end ripple_adder;
 
 architecture pipelined of ripple_adder is
-    signal s     : STD_LOGIC_VECTOR(31 downto 0);
-    signal s_reg : STD_LOGIC_VECTOR(31 downto 0);
+    signal s     : STD_LOGIC_VECTOR(n-1 downto 0);
+    signal s_reg : STD_LOGIC_VECTOR(n-1 downto 0);
 begin
     -- Combinational ripple adder
     s <= std_logic_vector(unsigned(a) + unsigned(b));
@@ -56,5 +58,9 @@ begin
             sum   <= s_reg;
         end if;
     end process;
-
+    
+    process(clk)
+    begin
+        
+    end process;
 end pipelined;

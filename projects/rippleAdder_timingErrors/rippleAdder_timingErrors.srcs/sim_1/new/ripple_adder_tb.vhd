@@ -39,18 +39,19 @@ architecture Behavioral of ripple_adder_tb is
 
 component ripple_adder_pipelined is
     Port ( clk : in STD_LOGIC;
+           reset : in std_logic;
            a : in STD_LOGIC_VECTOR (15 downto 0);
            b : in STD_LOGIC_VECTOR (15 downto 0);
            sum : out STD_LOGIC_VECTOR (15 downto 0));
 end component;
 
-signal clk : std_logic := '0';
+signal clk,reset : std_logic := '0';
 signal a,b,sum : std_logic_vector(15 downto 0) := (others => '0');
 signal time_period : time := 10ns;
 
 begin
 
-UUT : ripple_adder_pipelined port map (a=>a, b=>b, clk=>clk, sum=>sum);  
+UUT : ripple_adder_pipelined port map (a=>a, b=>b, clk=>clk, reset=>reset, sum=>sum);  
 
 clock_process : process
 begin
@@ -60,15 +61,37 @@ end process;
 
 input_process : process
 begin 
-
+    
+    reset <= '1';
     a <= std_logic_vector(to_unsigned(16, 16));
     b <= std_logic_vector(to_unsigned(16, 16));
     
     
     wait for 10 * time_period;
+    reset <= '0';
+    wait for 1 * time_period;
+    reset <= '1';
     
-    a <= std_logic_vector(to_unsigned(4095, 16));
+    a <= std_logic_vector(to_unsigned(111, 16));
+    b <= std_logic_vector(to_unsigned(553, 16));
+    
+    
+    wait for 10 * time_period;
+    reset <= '0';
+    wait for 1 * time_period;
+    reset <= '1';
+    
+    a <= std_logic_vector(to_unsigned(4123, 16));
     b <= std_logic_vector(to_unsigned(8191, 16));
+    
+    
+    wait for 10 * time_period;
+    reset <= '0';
+    wait for 1 * time_period;
+    reset <= '1';
+    
+    a <= std_logic_vector(to_unsigned(4339, 16));
+    b <= std_logic_vector(to_unsigned(7999, 16));
     
     wait;
     

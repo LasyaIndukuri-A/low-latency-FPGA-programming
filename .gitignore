@@ -7,7 +7,7 @@
 *.cache/
 *.hw/
 *.ip_user_files/
-*.srcs/
+#*.srcs/
 *.gen/
 *.xpr
 *.jou
